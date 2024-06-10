@@ -48,9 +48,9 @@ async def scalar_html():
 
 async def main():
     await prisma.connect()
-    config = uvicorn.Config("main:app", port=4000, log_level="info",reload=True, reload_delay=100)
-    server = uvicorn.Server(config)
-    await server.serve()
+    # config = uvicorn.Config("main:app", port=4000, log_level="info",reload=True, reload_delay=100)
+    # server = uvicorn.Server(config)
+    await uvicorn.run()
 
 
 if __name__ == "__main__":
