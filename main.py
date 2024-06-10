@@ -7,12 +7,24 @@ from lib.todos import todosRoute
 from lib.comments import comentRoutes
 from scalar_fastapi import get_scalar_api_reference
 from fastapi.middleware.cors import CORSMiddleware
-app = FastAPI()
+
+description = """
+free open source api. 🚀
+---------------------------------------------
+###from kawenzy `https://github.com/kawenzy`
+---------------------------------------------
+just simple api only not advance, this is better for beginner
+"""
+app = FastAPI(description=description,title="apikawe",version="1.0",contact={"name":"kawenzy","github":"https://github.com/kawenzy","instagram": "kawenzy_"})
 
 route = [userRoute,todosRoute,comentRoutes]
 
 for routes in route:
     app.include_router(router=routes, prefix="/api/v1")
+
+origins = [
+    "http://127.0.0.1:4000",
+]
 
 app.add_middleware(
     CORSMiddleware,
