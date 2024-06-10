@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 description = """
 free open source api. 🚀
 ---------------------------------------------
-###from kawenzy `https://github.com/kawenzy`
+##  from kawenzy `https://github.com/kawenzy`
 ---------------------------------------------
 just simple api only not advance, this is better for beginner
 """
