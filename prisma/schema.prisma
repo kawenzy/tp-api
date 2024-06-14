@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Side {
+  token String @unique
+  name String
+  email String
+  password String
+  imgurl String
+  createdAt DateTime @default(now())
+}
+
+model User {
+  uuid String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  imgurl String
+  token String?
+  salt String
+  createdAt DateTime @default(now())
+  todos Todos[]
+  comments Comments[]
+}
+
+model Todos {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  author User @relation(fields: [authorId], references: [uuid])
+  authorId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  comments Comments[]
+}
+
+model Comments {
+  id Int @id @default(autoincrement())
+  comment String
+  author User @relation(fields: [authorId], references: [uuid])
+  authorId String
+  todo Todos @relation(fields: [todoId], references: [id])
+  todoId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
